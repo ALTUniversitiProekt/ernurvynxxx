@@ -1,372 +1,648 @@
 <!DOCTYPE html>
-<html lang="kk">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="ERNURVYNX — digital creative studio">
-<meta name="theme-color" content="#080808">
-<title>ERNURVYNX — Digital Creative Studio</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="description"
+content="ERNURVYNX — digital experiences, creative technology and experimental web design.">
+
+<meta name="theme-color" content="#090d12">
+
+<title>ERNURVYNX — Digital Experiences</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Manrope:wght@300;400;500;600;700&display=swap');
+
+:root{
+--bg:#080c10;
+--bg2:#0b1117;
+--panel:rgba(255,255,255,.045);
+--panel2:rgba(255,255,255,.07);
+--line:rgba(255,255,255,.1);
+--text:#f4f6f5;
+--muted:#78828b;
+--soft:#aeb7bd;
+--accent:#d9ff42;
+--blue:#72b9ff;
+--mono:"DM Mono",monospace;
+--sans:"Manrope",sans-serif;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
 body{
-font-family:Arial,Helvetica,sans-serif;
-background:#080808;
-color:#f5f5f2;
+background:
+radial-gradient(circle at 70% 15%,rgba(61,108,145,.15),transparent 30%),
+radial-gradient(circle at 15% 65%,rgba(75,104,125,.08),transparent 30%),
+linear-gradient(135deg,#070a0e,#0a1015 50%,#070b0f);
+color:var(--text);
+font-family:var(--sans);
 overflow-x:hidden;
 }
+
 body:before{
 content:"";
 position:fixed;
 inset:0;
 pointer-events:none;
-opacity:.035;
-background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-z-index:99;
+z-index:100;
+opacity:.025;
+background-image:
+url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
-:root{
---bg:#080808;
---panel:#111;
---line:rgba(255,255,255,.1);
---muted:#777;
---white:#f5f5f2;
---accent:#d9ff3f;
+
+a{
+color:inherit;
+text-decoration:none;
 }
-a{text-decoration:none;color:inherit}
-button{font:inherit;cursor:pointer}
+
+button,
+input,
+textarea{
+font-family:inherit;
+}
+
+button{
+cursor:pointer;
+}
+
+#space{
+position:fixed;
+inset:0;
+z-index:-2;
+pointer-events:none;
+}
+
+.star{
+position:absolute;
+width:1px;
+height:1px;
+background:#fff;
+border-radius:50%;
+opacity:.35;
+}
+
+/* NAV */
+
 .nav{
 position:fixed;
 top:0;
 left:0;
 right:0;
-height:78px;
+height:82px;
+padding:0 5vw;
 display:flex;
 align-items:center;
 justify-content:space-between;
-padding:0 5%;
 z-index:50;
-transition:.35s;
+transition:.4s ease;
 }
-.nav.active{
-background:rgba(8,8,8,.82);
-backdrop-filter:blur(18px);
+
+.nav.scrolled{
+height:68px;
+background:rgba(7,11,15,.72);
+backdrop-filter:blur(20px);
 border-bottom:1px solid var(--line);
 }
+
 .logo{
 display:flex;
 align-items:center;
 gap:12px;
-font-size:13px;
-letter-spacing:3px;
-font-weight:bold;
+font-family:var(--mono);
+font-size:12px;
+letter-spacing:2px;
 }
-.logo i{
-width:31px;
-height:31px;
-border:1px solid #aaa;
+
+.logo-mark{
+width:32px;
+height:32px;
+border:1px solid rgba(255,255,255,.35);
 display:grid;
 place-items:center;
-font-style:normal;
-font-size:11px;
-}
-.links{
-display:flex;
-gap:32px;
-}
-.links a{
-font-size:12px;
-color:#888;
 transition:.3s;
 }
-.links a:hover{color:#fff}
-.menu{
-display:none;
-background:none;
-border:0;
-color:white;
-font-size:25px;
+
+.logo:hover .logo-mark{
+background:var(--accent);
+color:#071016;
 }
-.hero{
-min-height:100vh;
-padding:140px 5% 70px;
-display:grid;
-grid-template-columns:1.1fr .9fr;
-align-items:center;
-gap:40px;
+
+.nav-links{
+display:flex;
+gap:34px;
+}
+
+.nav-links a{
+font-size:11px;
+color:#89929a;
 position:relative;
 }
-.hero small{
+
+.nav-links a:after{
+content:"";
+position:absolute;
+left:0;
+bottom:-8px;
+height:1px;
+width:0;
+background:var(--accent);
+transition:.3s;
+}
+
+.nav-links a:hover{
+color:white;
+}
+
+.nav-links a:hover:after{
+width:100%;
+}
+
+.menu{
+display:none;
+border:0;
+background:none;
+color:white;
+font-size:24px;
+}
+
+/* HERO */
+
+.hero{
+min-height:100vh;
+padding:120px 5vw 60px;
+display:grid;
+grid-template-columns:48% 52%;
+align-items:center;
+position:relative;
+}
+
+.hero-copy{
+position:relative;
+z-index:4;
+}
+
+.kicker{
 display:flex;
 align-items:center;
 gap:10px;
+font-family:var(--mono);
 font-size:9px;
 letter-spacing:2px;
-color:#777;
+color:#727c85;
 margin-bottom:28px;
 }
-.dot{
+
+.live{
 width:6px;
 height:6px;
-border-radius:50%;
 background:var(--accent);
-box-shadow:0 0 15px var(--accent);
+border-radius:50%;
+box-shadow:0 0 18px var(--accent);
+animation:pulse 2s infinite;
 }
+
 .hero h1{
-font-size:clamp(55px,8vw,120px);
-line-height:.87;
-letter-spacing:-7px;
+font-size:clamp(55px,7.7vw,115px);
+line-height:.89;
+letter-spacing:-.07em;
 font-weight:500;
+max-width:900px;
 }
-.hero h1 span{color:#666}
-.hero p{
-max-width:490px;
-margin-top:34px;
-font-size:15px;
-line-height:1.8;
-color:#858585;
+
+.hero h1 .gray{
+color:#657079;
 }
-.actions{
+
+.hero-text{
+max-width:510px;
+margin-top:35px;
+font-size:14px;
+line-height:1.9;
+color:#879199;
+}
+
+.hero-buttons{
 display:flex;
-gap:15px;
+gap:14px;
 margin-top:38px;
 }
+
 .btn{
-padding:15px 21px;
 border:1px solid var(--line);
-background:#fff;
-color:#080808;
+padding:15px 20px;
+background:white;
+color:#071016;
 font-size:11px;
 transition:.3s;
 }
-.btn:hover{transform:translateY(-3px)}
-.btn.dark{
+
+.btn:hover{
+transform:translateY(-3px);
+background:var(--accent);
+}
+
+.btn.secondary{
 background:transparent;
-color:#aaa;
+color:#a1a9af;
 }
-.btn.dark:hover{color:#fff;border-color:#555}
-.visual{
-height:520px;
+
+.btn.secondary:hover{
+color:white;
+border-color:#555;
+}
+
+.hero-meta{
+display:flex;
+gap:30px;
+margin-top:65px;
+font-family:var(--mono);
+font-size:8px;
+color:#505a62;
+}
+
+.hero-meta strong{
+display:block;
+font-size:10px;
+font-weight:400;
+color:#9da5aa;
+margin-bottom:6px;
+}
+
+/* GLOBE */
+
+.globe-wrap{
+height:650px;
+position:relative;
 display:grid;
 place-items:center;
+}
+
+.globe{
+width:min(43vw,560px);
+height:min(43vw,560px);
 position:relative;
 }
-.ring{
+
+.globe canvas{
+width:100%!important;
+height:100%!important;
+display:block;
+}
+
+.globe-label{
 position:absolute;
-border:1px solid rgba(255,255,255,.1);
-border-radius:50%;
-}
-.r1{width:48%;height:48%;animation:spin 12s linear infinite}
-.r2{width:70%;height:70%;border-style:dashed;animation:spinr 20s linear infinite}
-.r3{width:94%;height:94%;border-color:rgba(217,255,63,.12);animation:spin 35s linear infinite}
-.core{
-width:155px;
-height:155px;
-border-radius:50%;
-background:radial-gradient(circle at 35% 30%,#333,#101010 55%,#050505);
-box-shadow:0 0 90px rgba(217,255,63,.08),inset 0 0 40px #000;
-display:grid;
-place-items:center;
-position:relative;
-}
-.core:before{
-content:"EV";
-width:88px;
-height:88px;
-border:1px solid #555;
-border-radius:50%;
-display:grid;
-place-items:center;
-color:var(--accent);
-font-family:monospace;
-}
-.core:after{
-content:"";
-position:absolute;
-width:230px;
-height:1px;
-background:linear-gradient(90deg,transparent,#777,transparent);
-transform:rotate(45deg);
-}
-.tag{
-position:absolute;
-padding:8px 10px;
-background:rgba(10,10,10,.8);
+padding:9px 12px;
+background:rgba(8,13,18,.7);
+backdrop-filter:blur(15px);
 border:1px solid var(--line);
-font:9px monospace;
-color:#777;
+font-family:var(--mono);
+font-size:8px;
+letter-spacing:1px;
+color:#7d8991;
+z-index:5;
 }
-.tag b{color:var(--accent);margin-right:7px}
-.t1{right:2%;top:13%}
-.t2{left:0;bottom:18%}
-.t3{right:-1%;top:48%}
-.scroll{
+
+.globe-label span{
+color:var(--accent);
+margin-right:8px;
+}
+
+.globe-label.one{
+top:18%;
+right:0;
+}
+
+.globe-label.two{
+bottom:18%;
+left:0;
+}
+
+.globe-label.three{
+top:48%;
+right:-3%;
+}
+
+.coordinates{
 position:absolute;
-bottom:35px;
-left:5%;
-font:8px monospace;
-letter-spacing:2px;
-color:#555;
+bottom:4%;
+right:2%;
+font-family:var(--mono);
+font-size:8px;
+line-height:1.8;
+color:#505b63;
+text-align:right;
 }
+
+.scroll-indicator{
+position:absolute;
+bottom:30px;
+left:5vw;
+font-family:var(--mono);
+font-size:8px;
+letter-spacing:2px;
+color:#4f5960;
+}
+
+/* COMMON */
+
 .section{
-padding:150px 5%;
+padding:160px 5vw;
 position:relative;
 }
-.heading{
+
+.section-head{
 display:grid;
-grid-template-columns:1fr .5fr;
+grid-template-columns:1fr .48fr;
 gap:80px;
 align-items:end;
-margin-bottom:70px;
+margin-bottom:75px;
 }
-.num{
-font:10px monospace;
-color:#666;
+
+.number{
+font-family:var(--mono);
+font-size:9px;
 letter-spacing:2px;
+color:#626d75;
 margin-bottom:20px;
 }
-.heading h2{
+
+.section-title{
 font-size:clamp(55px,7vw,105px);
 line-height:.9;
-letter-spacing:-6px;
+letter-spacing:-.065em;
 font-weight:500;
 }
-.heading h2 em{
-color:#666;
+
+.section-title em{
 font-style:normal;
+color:#66727a;
 }
-.heading p{
-font-size:14px;
-line-height:1.8;
-color:#777;
+
+.section-description{
+font-size:13px;
+line-height:1.9;
+color:#747f87;
+max-width:380px;
 }
-.projects{
+
+/* WORK */
+
+.work-grid{
 display:grid;
 grid-template-columns:1fr 1fr;
-gap:24px;
+gap:22px;
 }
-.card{
+
+.work-card{
+position:relative;
 cursor:pointer;
 }
-.card.big{grid-column:1/-1}
-.art{
-height:470px;
+
+.work-card.large{
+grid-column:1/-1;
+}
+
+.work-art{
+height:430px;
 border:1px solid var(--line);
+background:
+linear-gradient(145deg,rgba(255,255,255,.05),rgba(255,255,255,.015));
 position:relative;
 overflow:hidden;
 transition:.5s;
 }
-.card:not(.big) .art{height:430px}
-.card:hover .art{
-transform:translateY(-6px);
-border-color:rgba(217,255,63,.25);
+
+.work-card.large .work-art{
+height:490px;
 }
-.art1{
+
+.work-card:hover .work-art{
+transform:translateY(-6px);
+border-color:rgba(217,255,66,.24);
+}
+
+.work-art:after{
+content:"";
+position:absolute;
+inset:0;
+background:linear-gradient(
+120deg,
+transparent,
+rgba(255,255,255,.025),
+transparent
+);
+transform:translateX(-100%);
+transition:1s;
+}
+
+.work-card:hover .work-art:after{
+transform:translateX(100%);
+}
+
+/* PAYFLOW */
+
+.payflow{
 display:grid;
 place-items:center;
-background:radial-gradient(circle,#292929,#0e0e0e 65%);
+background:
+radial-gradient(circle at 50% 50%,rgba(73,126,164,.16),transparent 35%),
+#0b1116;
 }
-.interface{
-width:65%;
+
+.pay-ui{
+width:66%;
 aspect-ratio:16/9;
-border:1px solid #444;
+border:1px solid rgba(255,255,255,.15);
 background:rgba(255,255,255,.035);
-backdrop-filter:blur(10px);
-transform:rotate(-3deg);
+backdrop-filter:blur(18px);
 padding:25px;
-transition:.5s;
+transform:rotate(-3deg);
+transition:.6s;
+position:relative;
+box-shadow:0 40px 100px rgba(0,0,0,.35);
 }
-.card:hover .interface{transform:rotate(0) scale(1.03)}
-.interface-line{
+
+.work-card:hover .pay-ui{
+transform:rotate(0) scale(1.035);
+}
+
+.pay-top{
+display:flex;
+justify-content:space-between;
+font:8px var(--mono);
+color:#68737b;
+}
+
+.pay-line{
 height:1px;
-background:#444;
+background:#343d43;
+margin-top:18px;
 }
-.interface h3{
-margin-top:55px;
-font:25px monospace;
+
+.pay-ui h3{
+font:27px var(--mono);
 letter-spacing:3px;
+margin-top:60px;
 }
-.interface strong{
+
+.pay-value{
 position:absolute;
 right:25px;
 bottom:20px;
-font:35px monospace;
+font:36px var(--mono);
 color:var(--accent);
 }
-.art2{
+
+/* NEURAL */
+
+.neural{
 display:grid;
 place-items:center;
-background:radial-gradient(circle,#242424,#0a0a0a 70%);
+background:
+radial-gradient(circle,#18262e,#090e13 65%);
 }
-.system{
-width:230px;
-height:230px;
-border:1px solid #444;
+
+.neural-core{
+width:210px;
+height:210px;
 border-radius:50%;
+border:1px solid #38464f;
 position:relative;
-animation:spin 18s linear infinite;
+animation:spin 20s linear infinite;
 }
-.system:before,.system:after{
+
+.neural-core:before,
+.neural-core:after{
 content:"";
 position:absolute;
 inset:25px;
-border:1px solid #333;
+border:1px solid #28363e;
 border-radius:50%;
 }
-.system:after{
-inset:70px;
+
+.neural-core:after{
+inset:65px;
 border-color:var(--accent);
+box-shadow:0 0 30px rgba(217,255,66,.12);
 }
-.art3{
+
+.node{
+position:absolute;
+width:7px;
+height:7px;
+border-radius:50%;
 background:var(--accent);
-color:#080808;
+box-shadow:0 0 14px var(--accent);
+}
+
+.node:nth-child(1){top:-3px;left:50%}
+.node:nth-child(2){right:8px;bottom:32px}
+.node:nth-child(3){left:20px;bottom:35px}
+
+/* VX */
+
+.vx{
+background:
+linear-gradient(
+135deg,
+#d9ff42,
+#b7df2f
+);
+color:#081014;
 display:flex;
 align-items:center;
 padding:8%;
 }
-.words{
-font-size:clamp(45px,6vw,90px);
-font-weight:bold;
-line-height:.82;
-letter-spacing:-6px;
+
+.vx-text{
+font-size:clamp(45px,6vw,95px);
+font-weight:600;
+line-height:.8;
+letter-spacing:-.08em;
 }
-.words span{display:block}
-.words span:nth-child(2){margin-left:12%}
-.words span:nth-child(3){margin-left:4%}
-.info{
+
+.vx-text span{
+display:block;
+}
+
+.vx-text span:nth-child(2){
+margin-left:13%;
+}
+
+.vx-text span:nth-child(3){
+margin-left:5%;
+}
+
+.work-info{
 display:flex;
 justify-content:space-between;
+align-items:start;
 padding:20px 0;
 }
-.info h3{font-size:17px;font-weight:500}
-.info p{
-font:8px monospace;
-color:#666;
-text-transform:uppercase;
-}
-.about{
-display:grid;
-grid-template-columns:.8fr 1fr;
-gap:100px;
-}
-.about h2{
-font-size:clamp(55px,7vw,105px);
-line-height:.9;
-letter-spacing:-6px;
+
+.work-name{
+font-size:16px;
 font-weight:500;
 }
-.about h2 span{color:#666}
-.lead{
-font-size:clamp(21px,2.5vw,34px);
-line-height:1.4;
-color:#aaa;
+
+.work-type{
+font:8px var(--mono);
+color:#606a71;
+text-transform:uppercase;
+letter-spacing:1px;
 }
+
+/* ABOUT */
+
+.about-layout{
+display:grid;
+grid-template-columns:.8fr 1fr;
+gap:110px;
+}
+
+.about-title{
+font-size:clamp(55px,7vw,105px);
+line-height:.88;
+letter-spacing:-.065em;
+font-weight:500;
+}
+
+.about-title span{
+color:#65717a;
+}
+
+.about-lead{
+font-size:clamp(20px,2.5vw,33px);
+line-height:1.4;
+letter-spacing:-.025em;
+color:#aeb6bb;
+}
+
+.about-text{
+margin-top:30px;
+font-size:13px;
+line-height:1.9;
+color:#68737b;
+max-width:600px;
+}
+
 .stats{
+margin-top:70px;
 display:grid;
 grid-template-columns:1fr 1fr;
-margin-top:70px;
 border-top:1px solid var(--line);
 }
+
 .stat{
 height:130px;
 padding:20px 0;
@@ -375,353 +651,766 @@ display:flex;
 flex-direction:column;
 justify-content:space-between;
 }
-.stat:nth-child(odd){border-right:1px solid var(--line);padding-right:25px}
-.stat:nth-child(even){padding-left:25px}
+
+.stat:nth-child(odd){
+border-right:1px solid var(--line);
+padding-right:25px;
+}
+
+.stat:nth-child(even){
+padding-left:25px;
+}
+
 .stat b{
-font:10px monospace;
+font:10px var(--mono);
 color:var(--accent);
 }
-.stat span{font-size:13px;color:#777}
+
+.stat span{
+font-size:12px;
+color:#737e86;
+}
+
+/* STATEMENT */
+
 .statement{
-min-height:80vh;
-padding:130px 5%;
+min-height:90vh;
+padding:150px 5vw;
 display:flex;
-justify-content:center;
 flex-direction:column;
+justify-content:center;
+position:relative;
 }
+
+.statement:before{
+content:"";
+position:absolute;
+width:500px;
+height:500px;
+border-radius:50%;
+background:radial-gradient(circle,rgba(67,111,140,.12),transparent 70%);
+right:10%;
+top:20%;
+filter:blur(30px);
+}
+
 .statement small{
-font:10px monospace;
-color:#666;
-letter-spacing:3px;
+font:9px var(--mono);
+letter-spacing:2px;
+color:#606b73;
 }
+
 .statement h2{
-font-size:clamp(80px,15vw,220px);
-line-height:.78;
-letter-spacing:-12px;
+font-size:clamp(80px,15vw,225px);
+line-height:.77;
+letter-spacing:-.09em;
 font-weight:500;
 margin-top:25px;
+position:relative;
 }
-.statement h2 span{color:#666}
-.statement-bottom{
+
+.statement h2 span{
+color:#64717a;
+}
+
+.statement-footer{
 display:flex;
 justify-content:space-between;
 margin-top:80px;
-font:8px monospace;
-color:#555;
+font:8px var(--mono);
+color:#535e66;
 }
+
+/* CONTACT */
+
 .contact{
-min-height:80vh;
+min-height:85vh;
 display:flex;
-justify-content:center;
 flex-direction:column;
+justify-content:center;
 }
-.contact h2{
+
+.contact-title{
 font-size:clamp(60px,8vw,120px);
-line-height:.9;
-letter-spacing:-7px;
+line-height:.88;
+letter-spacing:-.07em;
 font-weight:500;
 }
-.contact h2 span{color:#666}
-.contact-btn{
-margin-top:45px;
-width:max-content;
-padding:17px 25px;
-background:#fff;
+
+.contact-title span{
+color:#66727a;
+}
+
+.contact-layout{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:100px;
+margin-top:60px;
+}
+
+.contact-copy{
+max-width:450px;
+font-size:14px;
+line-height:1.9;
+color:#78838b;
+}
+
+.form{
+display:flex;
+flex-direction:column;
+gap:14px;
+}
+
+.field{
+width:100%;
+padding:16px 0;
+background:transparent;
 border:0;
+border-bottom:1px solid var(--line);
+outline:none;
+color:white;
+font-size:13px;
+}
+
+.field:focus{
+border-color:var(--accent);
+}
+
+textarea.field{
+min-height:110px;
+resize:vertical;
+}
+
+.submit{
+align-self:flex-start;
+margin-top:15px;
+padding:16px 23px;
+border:0;
+background:white;
+color:#071016;
 font-size:11px;
 transition:.3s;
 }
-.contact-btn:hover{
+
+.submit:hover{
 background:var(--accent);
-transform:translateY(-4px);
+transform:translateY(-3px);
 }
+
+.form-message{
+font:9px var(--mono);
+color:var(--accent);
+display:none;
+}
+
+/* FOOTER */
+
 footer{
+padding:35px 5vw;
 border-top:1px solid var(--line);
-padding:35px 5%;
 display:flex;
 justify-content:space-between;
-color:#555;
-font:8px monospace;
+font:8px var(--mono);
+color:#535e66;
 }
+
+/* ANIMATION */
+
 @keyframes spin{
 to{transform:rotate(360deg)}
 }
-@keyframes spinr{
-to{transform:rotate(-360deg)}
+
+@keyframes pulse{
+0%,100%{opacity:1}
+50%{opacity:.35}
 }
-@media(max-width:850px){
-.links{
+
+/* TABLET */
+
+@media(max-width:900px){
+
+.nav{
+padding:0 25px;
+}
+
+.nav-links{
 position:fixed;
-inset:0 0 0 auto;
+top:0;
+right:0;
 width:280px;
 height:100vh;
-background:#0d0d0d;
-border-left:1px solid var(--line);
+padding:120px 35px;
 display:flex;
 flex-direction:column;
-padding:120px 35px;
 gap:28px;
+background:#0a1015;
+border-left:1px solid var(--line);
 transform:translateX(100%);
 transition:.4s;
 }
-.links.open{transform:translateX(0)}
-.links a{font-size:22px}
-.menu{display:block}
+
+.nav-links.open{
+transform:translateX(0);
+}
+
+.nav-links a{
+font-size:22px;
+}
+
+.menu{
+display:block;
+position:relative;
+z-index:60;
+}
+
 .hero{
 grid-template-columns:1fr;
-padding-top:130px;
+padding:130px 25px 80px;
 }
-.visual{height:420px}
-.heading{grid-template-columns:1fr;gap:30px}
-.projects{grid-template-columns:1fr}
-.card.big{grid-column:auto}
-.about{grid-template-columns:1fr;gap:50px}
-.section{padding:110px 25px}
-.hero{padding-left:25px;padding-right:25px}
-.statement{padding-left:25px;padding-right:25px}
-.contact{padding-left:25px;padding-right:25px}
-footer{padding:30px 25px;gap:20px;flex-direction:column}
+
+.hero h1{
+font-size:clamp(55px,12vw,100px);
 }
-@media(max-width:500px){
-.hero h1{letter-spacing:-4px}
-.hero p{font-size:13px}
-.actions{flex-direction:column;align-items:flex-start}
-.visual{width:100%;height:360px}
-.core{width:120px;height:120px}
-.core:before{width:70px;height:70px}
-.art,.card:not(.big) .art{height:330px}
-.interface{width:78%}
-.heading h2,.about h2{letter-spacing:-4px}
-.statement h2{font-size:23vw;letter-spacing:-6px}
-.statement-bottom{flex-direction:column;gap:12px}
+
+.globe-wrap{
+height:520px;
+}
+
+.globe{
+width:min(85vw,520px);
+height:min(85vw,520px);
+}
+
+.scroll-indicator{
+display:none;
+}
+
+.section{
+padding:110px 25px;
+}
+
+.section-head{
+grid-template-columns:1fr;
+gap:30px;
+}
+
+.work-grid{
+grid-template-columns:1fr;
+}
+
+.work-card.large{
+grid-column:auto;
+}
+
+.about-layout{
+grid-template-columns:1fr;
+gap:55px;
+}
+
+.contact-layout{
+grid-template-columns:1fr;
+gap:60px;
+}
+
+footer{
+padding:30px 25px;
+}
+}
+
+/* PHONE */
+
+@media(max-width:550px){
+
+.logo{
+font-size:10px;
+}
+
+.hero{
+padding-top:120px;
+}
+
+.hero h1{
+letter-spacing:-.055em;
+}
+
+.hero-text{
+font-size:13px;
+}
+
+.hero-buttons{
+flex-direction:column;
+align-items:flex-start;
+}
+
+.hero-meta{
+gap:18px;
+flex-wrap:wrap;
+}
+
+.globe-wrap{
+height:420px;
+margin-top:20px;
+}
+
+.globe{
+width:100vw;
+height:100vw;
+max-width:440px;
+max-height:440px;
+}
+
+.globe-label{
+font-size:7px;
+}
+
+.globe-label.one{
+right:2%;
+}
+
+.globe-label.three{
+right:0;
+}
+
+.work-art,
+.work-card.large .work-art{
+height:330px;
+}
+
+.pay-ui{
+width:78%;
+padding:18px;
+}
+
+.pay-ui h3{
+font-size:18px;
+margin-top:40px;
+}
+
+.pay-value{
+font-size:24px;
+}
+
+.neural-core{
+width:170px;
+height:170px;
+}
+
+.vx-text{
+font-size:45px;
+}
+
+.about-title{
+letter-spacing:-.05em;
+}
+
+.stats{
+margin-top:45px;
+}
+
+.statement{
+min-height:70vh;
+padding:100px 25px;
+}
+
+.statement h2{
+font-size:22vw;
+letter-spacing:-.07em;
+}
+
+.statement-footer{
+flex-direction:column;
+gap:12px;
+}
+
+.contact{
+padding:100px 25px;
+}
+
+.contact-layout{
+margin-top:45px;
+}
+
+footer{
+flex-direction:column;
+gap:15px;
+}
 }
 </style>
 </head>
 
 <body>
 
+<div id="space"></div>
+
 <header class="nav" id="nav">
-  <a href="#home" class="logo">
-    <i>E</i>
-    ERNURVYNX
-  </a>
 
-  <nav class="links" id="links">
-    <a href="#home">Home</a>
-    <a href="#work">Work</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
-  </nav>
+<a href="#home" class="logo">
+<span class="logo-mark">E</span>
+<span>ERNURVYNX</span>
+</a>
 
-  <button class="menu" id="menu">☰</button>
+<nav class="nav-links" id="navLinks">
+<a href="#home">Home</a>
+<a href="#work">Work</a>
+<a href="#about">About</a>
+<a href="#contact">Contact</a>
+</nav>
+
+<button class="menu" id="menu">☰</button>
+
 </header>
+
 
 <main>
 
+<!-- HERO -->
+
 <section class="hero" id="home">
 
-  <div>
-    <small>
-      <span class="dot"></span>
-      DIGITAL CREATIVE STUDIO
-    </small>
+<div class="hero-copy">
 
-    <h1>
-      Ideas become
-      <br>
-      <span>digital reality.</span>
-    </h1>
+<div class="kicker">
+<span class="live"></span>
+DIGITAL CREATIVE STUDIO
+</div>
 
-    <p>
-      ERNURVYNX creates websites, digital products
-      and experimental experiences where technology
-      meets creativity.
-    </p>
+<h1>
+Ideas become
+<br>
+<span class="gray">digital reality.</span>
+</h1>
 
-    <div class="actions">
-      <button class="btn" onclick="go('work')">
-        Explore work ↗
-      </button>
+<p class="hero-text">
+ERNURVYNX creates digital experiences,
+web products and experimental technology
+with a focus on clarity, atmosphere and
+human interaction.
+</p>
 
-      <button class="btn dark" onclick="go('about')">
-        Discover studio
-      </button>
-    </div>
-  </div>
+<div class="hero-buttons">
 
-  <div class="visual">
-    <div class="ring r1"></div>
-    <div class="ring r2"></div>
-    <div class="ring r3"></div>
+<button class="btn" onclick="scrollToId('work')">
+Explore work ↗
+</button>
 
-    <div class="core"></div>
+<button class="btn secondary" onclick="scrollToId('about')">
+Discover studio
+</button>
 
-    <div class="tag t1">
-      <b>01</b>DIGITAL
-    </div>
+</div>
 
-    <div class="tag t2">
-      <b>02</b>CREATIVE
-    </div>
+<div class="hero-meta">
 
-    <div class="tag t3">
-      <b>03</b>FUTURE
-    </div>
-  </div>
+<div>
+<strong>2026</strong>
+YEAR
+</div>
 
-  <div class="scroll">SCROLL TO EXPLORE ─────</div>
+<div>
+<strong>GLOBAL</strong>
+LOCATION
+</div>
+
+<div>
+<strong>01—∞</strong>
+EXPERIMENTS
+</div>
+
+</div>
+
+</div>
+
+
+<div class="globe-wrap">
+
+<div class="globe" id="globe"></div>
+
+<div class="globe-label one">
+<span>01</span> EARTH / LIVE
+</div>
+
+<div class="globe-label two">
+<span>02</span> DIGITAL PLANET
+</div>
+
+<div class="globe-label three">
+<span>03</span> EXPLORING
+</div>
+
+<div class="coordinates">
+43.2389° N<br>
+76.8897° E<br>
+ALMATY / KZ
+</div>
+
+</div>
+
+<div class="scroll-indicator">
+SCROLL TO EXPLORE ─────────
+</div>
 
 </section>
 
+
+<!-- WORK -->
 
 <section class="section" id="work">
 
-  <div class="heading">
-    <div>
-      <div class="num">01 / SELECTED WORK</div>
+<div class="section-head">
 
-      <h2>
-        Selected
-        <br>
-        <em>experiments.</em>
-      </h2>
-    </div>
+<div>
+<div class="number">01 / SELECTED WORK</div>
 
-    <p>
-      Digital concepts, interfaces and visual
-      experiments created around technology,
-      design and curiosity.
-    </p>
-  </div>
+<h2 class="section-title">
+Selected
+<br>
+<em>experiments.</em>
+</h2>
+</div>
 
-  <div class="projects">
+<p class="section-description">
+A collection of interfaces, concepts and
+digital experiments exploring the space
+between technology and visual culture.
+</p>
 
-    <article class="card big">
-      <div class="art art1">
-        <div class="interface">
-          <div class="interface-line"></div>
-          <h3>PAYFLOW</h3>
-          <strong>08</strong>
-        </div>
-      </div>
-
-      <div class="info">
-        <h3>PayFlow</h3>
-        <p>Fintech / Web Experience</p>
-      </div>
-    </article>
-
-    <article class="card">
-      <div class="art art2">
-        <div class="system"></div>
-      </div>
-
-      <div class="info">
-        <h3>Neural</h3>
-        <p>AI / Interactive System</p>
-      </div>
-    </article>
-
-    <article class="card">
-      <div class="art art3">
-        <div class="words">
-          <span>CREATE</span>
-          <span>WITHOUT</span>
-          <span>LIMITS</span>
-        </div>
-      </div>
-
-      <div class="info">
-        <h3>VX Studio</h3>
-        <p>Identity / Digital Design</p>
-      </div>
-    </article>
-
-  </div>
-</section>
+</div>
 
 
-<section class="section about" id="about">
+<div class="work-grid">
 
-  <div>
-    <div class="num">02 / ABOUT</div>
 
-    <h2>
-      Not another
-      <br>
-      <span>template.</span>
-    </h2>
-  </div>
+<article class="work-card large">
 
-  <div>
+<div class="work-art payflow">
 
-    <p class="lead">
-      ERNURVYNX is an independent digital
-      creative project focused on building
-      useful, expressive and unexpected
-      digital experiences.
-    </p>
+<div class="pay-ui">
 
-    <div class="stats">
+<div class="pay-top">
+<span>PAYFLOW / SYSTEM</span>
+<span>08.26</span>
+</div>
 
-      <div class="stat">
-        <b>01</b>
-        <span>Web experiences</span>
-      </div>
+<div class="pay-line"></div>
 
-      <div class="stat">
-        <b>02</b>
-        <span>AI & technology</span>
-      </div>
+<h3>PAYFLOW</h3>
 
-      <div class="stat">
-        <b>03</b>
-        <span>Creative systems</span>
-      </div>
+<div class="pay-value">
+$8.42
+</div>
 
-      <div class="stat">
-        <b>04</b>
-        <span>Digital experiments</span>
-      </div>
+</div>
 
-    </div>
+</div>
 
-  </div>
+<div class="work-info">
+<div class="work-name">PayFlow</div>
+<div class="work-type">Fintech / Web Experience</div>
+</div>
+
+</article>
+
+
+<article class="work-card">
+
+<div class="work-art neural">
+
+<div class="neural-core">
+
+<span class="node"></span>
+<span class="node"></span>
+<span class="node"></span>
+
+</div>
+
+</div>
+
+<div class="work-info">
+<div class="work-name">Neural</div>
+<div class="work-type">AI / Interactive System</div>
+</div>
+
+</article>
+
+
+<article class="work-card">
+
+<div class="work-art vx">
+
+<div class="vx-text">
+<span>CREATE</span>
+<span>WITHOUT</span>
+<span>LIMITS</span>
+</div>
+
+</div>
+
+<div class="work-info">
+<div class="work-name">VX Studio</div>
+<div class="work-type">Identity / Digital Design</div>
+</div>
+
+</article>
+
+
+</div>
 
 </section>
 
+
+<!-- ABOUT -->
+
+<section class="section" id="about">
+
+<div class="about-layout">
+
+<div>
+
+<div class="number">02 / ABOUT</div>
+
+<h2 class="about-title">
+Not another
+<br>
+<span>template.</span>
+</h2>
+
+</div>
+
+
+<div>
+
+<p class="about-lead">
+We believe the best digital experiences
+should feel simple on the surface
+and interesting underneath.
+</p>
+
+<p class="about-text">
+ERNURVYNX is an independent digital
+creative project exploring websites,
+interactive interfaces, artificial
+intelligence and experimental visual
+systems.
+</p>
+
+
+<div class="stats">
+
+<div class="stat">
+<b>01</b>
+<span>Web experiences</span>
+</div>
+
+<div class="stat">
+<b>02</b>
+<span>AI & technology</span>
+</div>
+
+<div class="stat">
+<b>03</b>
+<span>Creative systems</span>
+</div>
+
+<div class="stat">
+<b>04</b>
+<span>Digital experiments</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- STATEMENT -->
 
 <section class="statement">
 
-  <small>ERNURVYNX / 2026</small>
+<small>ERNURVYNX / DIGITAL CULTURE / 2026</small>
 
-  <h2>
-    DIGITAL
-    <br>
-    <span>THINGS.</span>
-  </h2>
+<h2>
+DIGITAL
+<br>
+<span>THINGS.</span>
+</h2>
 
-  <div class="statement-bottom">
-    <span>BUILD / CREATE / EXPLORE</span>
-    <span>KEEP MOVING ↗</span>
-  </div>
+<div class="statement-footer">
+<span>BUILD / CREATE / EXPLORE</span>
+<span>KEEP MOVING ↗</span>
+</div>
 
 </section>
 
 
+<!-- CONTACT -->
+
 <section class="section contact" id="contact">
 
-  <div class="num">03 / CONTACT</div>
+<div class="number">03 / CONTACT</div>
 
-  <h2>
-    Have an idea?
-    <br>
-    <span>Let's build it.</span>
-  </h2>
+<h2 class="contact-title">
+Have an idea?
+<br>
+<span>Let's build it.</span>
+</h2>
 
-  <button class="contact-btn" onclick="contactMessage()">
-    Start a conversation ↗
-  </button>
+
+<div class="contact-layout">
+
+<div>
+
+<p class="contact-copy">
+Have a project, experiment or strange idea
+you want to bring to life? Tell us a little
+about it. There is no perfect brief required.
+</p>
+
+</div>
+
+
+<form class="form" id="contactForm">
+
+<input
+class="field"
+type="text"
+placeholder="Your name"
+required
+>
+
+<input
+class="field"
+type="email"
+placeholder="Your email"
+required
+>
+
+<input
+class="field"
+type="text"
+placeholder="Project / idea"
+required
+>
+
+<textarea
+class="field"
+placeholder="Tell us about it..."
+required
+></textarea>
+
+<button class="submit" type="submit">
+Send message ↗
+</button>
+
+<div class="form-message" id="formMessage">
+MESSAGE READY — CONNECT YOUR EMAIL SERVICE.
+</div>
+
+</form>
+
+</div>
 
 </section>
 
@@ -729,60 +1418,447 @@ footer{padding:30px 25px;gap:20px;flex-direction:column}
 
 
 <footer>
-  <span>ERNURVYNX — DIGITAL CREATIVE STUDIO</span>
-  <span>© 2026</span>
+
+<span>ERNURVYNX — DIGITAL CREATIVE STUDIO</span>
+
+<span>© 2026 / BUILT WITH CURIOSITY</span>
+
 </footer>
 
 
+<!-- THREE.JS -->
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+
 <script>
+
 const nav=document.getElementById("nav");
-const links=document.getElementById("links");
 const menu=document.getElementById("menu");
+const navLinks=document.getElementById("navLinks");
 
 window.addEventListener("scroll",()=>{
-  nav.classList.toggle("active",window.scrollY>40);
+
+nav.classList.toggle(
+"scrolled",
+window.scrollY>40
+);
+
 });
 
 menu.addEventListener("click",()=>{
-  links.classList.toggle("open");
-  menu.textContent=links.classList.contains("open")?"×":"☰";
+
+navLinks.classList.toggle("open");
+
+menu.textContent=
+navLinks.classList.contains("open")
+?"×"
+:"☰";
+
 });
 
-document.querySelectorAll(".links a").forEach(a=>{
-  a.addEventListener("click",()=>{
-    links.classList.remove("open");
-    menu.textContent="☰";
-  });
+navLinks.querySelectorAll("a").forEach(link=>{
+
+link.addEventListener("click",()=>{
+
+navLinks.classList.remove("open");
+menu.textContent="☰";
+
 });
 
-function go(id){
-  document.getElementById(id)?.scrollIntoView({
-    behavior:"smooth"
-  });
+});
+
+
+function scrollToId(id){
+
+document.getElementById(id)?.scrollIntoView({
+behavior:"smooth"
+});
+
 }
 
-function contactMessage(){
-  alert(
-    "Contact section дайын. Келесі кезеңде мұнда толық contact form қосамыз."
-  );
+
+/* STARS */
+
+const space=document.getElementById("space");
+
+for(let i=0;i<180;i++){
+
+const star=document.createElement("span");
+
+star.className="star";
+
+star.style.left=Math.random()*100+"%";
+star.style.top=Math.random()*100+"%";
+star.style.opacity=.15+Math.random()*.5;
+
+space.appendChild(star);
+
 }
 
-const cards=document.querySelectorAll(".card");
 
-cards.forEach(card=>{
-  card.addEventListener("mousemove",e=>{
-    const r=card.getBoundingClientRect();
-    const x=(e.clientX-r.left)/r.width-.5;
-    const y=(e.clientY-r.top)/r.height-.5;
+/* GLOBE */
 
-    card.style.transform=
-      `perspective(900px) rotateX(${y*-2}deg) rotateY(${x*2}deg)`;
-  });
+const container=document.getElementById("globe");
 
-  card.addEventListener("mouseleave",()=>{
-    card.style.transform="";
-  });
+const scene=new THREE.Scene();
+
+const camera=new THREE.PerspectiveCamera(
+35,
+container.clientWidth/container.clientHeight,
+0.1,
+100
+);
+
+camera.position.z=3.4;
+
+const renderer=new THREE.WebGLRenderer({
+antialias:true,
+alpha:true
 });
+
+renderer.setPixelRatio(
+Math.min(window.devicePixelRatio,2)
+);
+
+renderer.setSize(
+container.clientWidth,
+container.clientHeight
+);
+
+container.appendChild(renderer.domElement);
+
+
+/* EARTH */
+
+const earthGeometry=new THREE.SphereGeometry(
+1,
+96,
+96
+);
+
+
+/*
+  Public NASA texture.
+  No credentials are required.
+*/
+
+const loader=new THREE.TextureLoader();
+
+const earthTexture=loader.load(
+"https://threejs.org/examples/textures/planets/earth_atmos_2048.jpg"
+);
+
+const earthBump=loader.load(
+"https://threejs.org/examples/textures/planets/earth_normal_2048.jpg"
+);
+
+const earthSpecular=loader.load(
+"https://threejs.org/examples/textures/planets/earth_specular_2048.jpg"
+);
+
+const earthMaterial=new THREE.MeshPhongMaterial({
+
+map:earthTexture,
+
+bumpMap:earthBump,
+
+bumpScale:.045,
+
+specularMap:earthSpecular,
+
+specular:new THREE.Color(
+0x445566
+),
+
+shininess:12
+
+});
+
+const earth=new THREE.Mesh(
+earthGeometry,
+earthMaterial
+);
+
+scene.add(earth);
+
+
+/* ATMOSPHERE */
+
+const atmosphereGeometry=
+new THREE.SphereGeometry(
+1.045,
+96,
+96
+);
+
+const atmosphereMaterial=
+new THREE.MeshBasicMaterial({
+
+color:0x4ca5ff,
+
+transparent:true,
+
+opacity:.075,
+
+side:THREE.BackSide
+
+});
+
+const atmosphere=
+new THREE.Mesh(
+atmosphereGeometry,
+atmosphereMaterial
+);
+
+scene.add(atmosphere);
+
+
+/* LIGHT */
+
+const ambientLight=
+new THREE.AmbientLight(
+0x7f8f9f,
+.55
+);
+
+scene.add(ambientLight);
+
+const sun=
+new THREE.DirectionalLight(
+0xffffff,
+2.3
+);
+
+sun.position.set(
+4,
+2,
+5
+);
+
+scene.add(sun);
+
+
+/* CITY-LIKE POINTS */
+
+const pointsGeometry=
+new THREE.BufferGeometry();
+
+const positions=[];
+
+for(let i=0;i<600;i++){
+
+const phi=
+Math.acos(
+2*Math.random()-1
+);
+
+const theta=
+Math.random()*Math.PI*2;
+
+const radius=1.012;
+
+const x=
+radius*Math.sin(phi)*Math.cos(theta);
+
+const y=
+radius*Math.cos(phi);
+
+const z=
+radius*Math.sin(phi)*Math.sin(theta);
+
+positions.push(x,y,z);
+
+}
+
+pointsGeometry.setAttribute(
+"position",
+new THREE.Float32BufferAttribute(
+positions,
+3
+)
+);
+
+const pointsMaterial=
+new THREE.PointsMaterial({
+
+color:0xd9ff70,
+
+size:.008,
+
+transparent:true,
+
+opacity:.55
+
+});
+
+const cityPoints=
+new THREE.Points(
+pointsGeometry,
+pointsMaterial
+);
+
+scene.add(cityPoints);
+
+
+/* INTERACTION */
+
+let targetRotationX=0;
+let targetRotationY=0;
+
+container.addEventListener(
+"mousemove",
+event=>{
+
+const rect=
+container.getBoundingClientRect();
+
+const x=
+(event.clientX-rect.left)/
+rect.width-.5;
+
+const y=
+(event.clientY-rect.top)/
+rect.height-.5;
+
+targetRotationY=x*.5;
+targetRotationX=y*.25;
+
+}
+);
+
+container.addEventListener(
+"mouseleave",
+()=>{
+
+targetRotationY=0;
+targetRotationX=0;
+
+}
+);
+
+
+/* ANIMATION */
+
+function animate(){
+
+requestAnimationFrame(animate);
+
+earth.rotation.y+=.0015;
+
+cityPoints.rotation.y=
+earth.rotation.y;
+
+earth.rotation.x+=
+(targetRotationX-earth.rotation.x)*.025;
+
+earth.rotation.y+=
+(targetRotationY)*.008;
+
+atmosphere.rotation.y=
+earth.rotation.y;
+
+renderer.render(
+scene,
+camera
+);
+
+}
+
+animate();
+
+
+/* RESIZE */
+
+window.addEventListener(
+"resize",
+()=>{
+
+const width=
+container.clientWidth;
+
+const height=
+container.clientHeight;
+
+camera.aspect=
+width/height;
+
+camera.updateProjectionMatrix();
+
+renderer.setSize(
+width,
+height
+);
+
+}
+);
+
+
+/* CONTACT */
+
+const form=
+document.getElementById("contactForm");
+
+const formMessage=
+document.getElementById("formMessage");
+
+form.addEventListener(
+"submit",
+event=>{
+
+event.preventDefault();
+
+formMessage.style.display="block";
+
+setTimeout(()=>{
+
+formMessage.style.display="none";
+
+},5000);
+
+}
+);
+
+
+/* CARD PARALLAX */
+
+document
+.querySelectorAll(".work-card")
+.forEach(card=>{
+
+card.addEventListener(
+"mousemove",
+event=>{
+
+const rect=
+card.getBoundingClientRect();
+
+const x=
+(event.clientX-rect.left)/
+rect.width-.5;
+
+const y=
+(event.clientY-rect.top)/
+rect.height-.5;
+
+card.style.transform=
+`perspective(1000px)
+rotateX(${y*-1.5}deg)
+rotateY(${x*1.5}deg)`;
+
+}
+);
+
+card.addEventListener(
+"mouseleave",
+()=>{
+
+card.style.transform="";
+
+}
+);
+
+});
+
 </script>
 
 </body>

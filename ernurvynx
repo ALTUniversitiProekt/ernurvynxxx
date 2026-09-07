@@ -1,0 +1,4 @@
+npm create vite@latest ernurvynx -- --template react
+cd ernurvynx
+npm install
+npm run dev

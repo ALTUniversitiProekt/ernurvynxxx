@@ -1,43 +1,789 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="ERNURVYNX — digital creative studio">
+<meta name="theme-color" content="#080808">
+<title>ERNURVYNX — Digital Creative Studio</title>
 
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0"
-    />
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+font-family:Arial,Helvetica,sans-serif;
+background:#080808;
+color:#f5f5f2;
+overflow-x:hidden;
+}
+body:before{
+content:"";
+position:fixed;
+inset:0;
+pointer-events:none;
+opacity:.035;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+z-index:99;
+}
+:root{
+--bg:#080808;
+--panel:#111;
+--line:rgba(255,255,255,.1);
+--muted:#777;
+--white:#f5f5f2;
+--accent:#d9ff3f;
+}
+a{text-decoration:none;color:inherit}
+button{font:inherit;cursor:pointer}
+.nav{
+position:fixed;
+top:0;
+left:0;
+right:0;
+height:78px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 5%;
+z-index:50;
+transition:.35s;
+}
+.nav.active{
+background:rgba(8,8,8,.82);
+backdrop-filter:blur(18px);
+border-bottom:1px solid var(--line);
+}
+.logo{
+display:flex;
+align-items:center;
+gap:12px;
+font-size:13px;
+letter-spacing:3px;
+font-weight:bold;
+}
+.logo i{
+width:31px;
+height:31px;
+border:1px solid #aaa;
+display:grid;
+place-items:center;
+font-style:normal;
+font-size:11px;
+}
+.links{
+display:flex;
+gap:32px;
+}
+.links a{
+font-size:12px;
+color:#888;
+transition:.3s;
+}
+.links a:hover{color:#fff}
+.menu{
+display:none;
+background:none;
+border:0;
+color:white;
+font-size:25px;
+}
+.hero{
+min-height:100vh;
+padding:140px 5% 70px;
+display:grid;
+grid-template-columns:1.1fr .9fr;
+align-items:center;
+gap:40px;
+position:relative;
+}
+.hero small{
+display:flex;
+align-items:center;
+gap:10px;
+font-size:9px;
+letter-spacing:2px;
+color:#777;
+margin-bottom:28px;
+}
+.dot{
+width:6px;
+height:6px;
+border-radius:50%;
+background:var(--accent);
+box-shadow:0 0 15px var(--accent);
+}
+.hero h1{
+font-size:clamp(55px,8vw,120px);
+line-height:.87;
+letter-spacing:-7px;
+font-weight:500;
+}
+.hero h1 span{color:#666}
+.hero p{
+max-width:490px;
+margin-top:34px;
+font-size:15px;
+line-height:1.8;
+color:#858585;
+}
+.actions{
+display:flex;
+gap:15px;
+margin-top:38px;
+}
+.btn{
+padding:15px 21px;
+border:1px solid var(--line);
+background:#fff;
+color:#080808;
+font-size:11px;
+transition:.3s;
+}
+.btn:hover{transform:translateY(-3px)}
+.btn.dark{
+background:transparent;
+color:#aaa;
+}
+.btn.dark:hover{color:#fff;border-color:#555}
+.visual{
+height:520px;
+display:grid;
+place-items:center;
+position:relative;
+}
+.ring{
+position:absolute;
+border:1px solid rgba(255,255,255,.1);
+border-radius:50%;
+}
+.r1{width:48%;height:48%;animation:spin 12s linear infinite}
+.r2{width:70%;height:70%;border-style:dashed;animation:spinr 20s linear infinite}
+.r3{width:94%;height:94%;border-color:rgba(217,255,63,.12);animation:spin 35s linear infinite}
+.core{
+width:155px;
+height:155px;
+border-radius:50%;
+background:radial-gradient(circle at 35% 30%,#333,#101010 55%,#050505);
+box-shadow:0 0 90px rgba(217,255,63,.08),inset 0 0 40px #000;
+display:grid;
+place-items:center;
+position:relative;
+}
+.core:before{
+content:"EV";
+width:88px;
+height:88px;
+border:1px solid #555;
+border-radius:50%;
+display:grid;
+place-items:center;
+color:var(--accent);
+font-family:monospace;
+}
+.core:after{
+content:"";
+position:absolute;
+width:230px;
+height:1px;
+background:linear-gradient(90deg,transparent,#777,transparent);
+transform:rotate(45deg);
+}
+.tag{
+position:absolute;
+padding:8px 10px;
+background:rgba(10,10,10,.8);
+border:1px solid var(--line);
+font:9px monospace;
+color:#777;
+}
+.tag b{color:var(--accent);margin-right:7px}
+.t1{right:2%;top:13%}
+.t2{left:0;bottom:18%}
+.t3{right:-1%;top:48%}
+.scroll{
+position:absolute;
+bottom:35px;
+left:5%;
+font:8px monospace;
+letter-spacing:2px;
+color:#555;
+}
+.section{
+padding:150px 5%;
+position:relative;
+}
+.heading{
+display:grid;
+grid-template-columns:1fr .5fr;
+gap:80px;
+align-items:end;
+margin-bottom:70px;
+}
+.num{
+font:10px monospace;
+color:#666;
+letter-spacing:2px;
+margin-bottom:20px;
+}
+.heading h2{
+font-size:clamp(55px,7vw,105px);
+line-height:.9;
+letter-spacing:-6px;
+font-weight:500;
+}
+.heading h2 em{
+color:#666;
+font-style:normal;
+}
+.heading p{
+font-size:14px;
+line-height:1.8;
+color:#777;
+}
+.projects{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:24px;
+}
+.card{
+cursor:pointer;
+}
+.card.big{grid-column:1/-1}
+.art{
+height:470px;
+border:1px solid var(--line);
+position:relative;
+overflow:hidden;
+transition:.5s;
+}
+.card:not(.big) .art{height:430px}
+.card:hover .art{
+transform:translateY(-6px);
+border-color:rgba(217,255,63,.25);
+}
+.art1{
+display:grid;
+place-items:center;
+background:radial-gradient(circle,#292929,#0e0e0e 65%);
+}
+.interface{
+width:65%;
+aspect-ratio:16/9;
+border:1px solid #444;
+background:rgba(255,255,255,.035);
+backdrop-filter:blur(10px);
+transform:rotate(-3deg);
+padding:25px;
+transition:.5s;
+}
+.card:hover .interface{transform:rotate(0) scale(1.03)}
+.interface-line{
+height:1px;
+background:#444;
+}
+.interface h3{
+margin-top:55px;
+font:25px monospace;
+letter-spacing:3px;
+}
+.interface strong{
+position:absolute;
+right:25px;
+bottom:20px;
+font:35px monospace;
+color:var(--accent);
+}
+.art2{
+display:grid;
+place-items:center;
+background:radial-gradient(circle,#242424,#0a0a0a 70%);
+}
+.system{
+width:230px;
+height:230px;
+border:1px solid #444;
+border-radius:50%;
+position:relative;
+animation:spin 18s linear infinite;
+}
+.system:before,.system:after{
+content:"";
+position:absolute;
+inset:25px;
+border:1px solid #333;
+border-radius:50%;
+}
+.system:after{
+inset:70px;
+border-color:var(--accent);
+}
+.art3{
+background:var(--accent);
+color:#080808;
+display:flex;
+align-items:center;
+padding:8%;
+}
+.words{
+font-size:clamp(45px,6vw,90px);
+font-weight:bold;
+line-height:.82;
+letter-spacing:-6px;
+}
+.words span{display:block}
+.words span:nth-child(2){margin-left:12%}
+.words span:nth-child(3){margin-left:4%}
+.info{
+display:flex;
+justify-content:space-between;
+padding:20px 0;
+}
+.info h3{font-size:17px;font-weight:500}
+.info p{
+font:8px monospace;
+color:#666;
+text-transform:uppercase;
+}
+.about{
+display:grid;
+grid-template-columns:.8fr 1fr;
+gap:100px;
+}
+.about h2{
+font-size:clamp(55px,7vw,105px);
+line-height:.9;
+letter-spacing:-6px;
+font-weight:500;
+}
+.about h2 span{color:#666}
+.lead{
+font-size:clamp(21px,2.5vw,34px);
+line-height:1.4;
+color:#aaa;
+}
+.stats{
+display:grid;
+grid-template-columns:1fr 1fr;
+margin-top:70px;
+border-top:1px solid var(--line);
+}
+.stat{
+height:130px;
+padding:20px 0;
+border-bottom:1px solid var(--line);
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+}
+.stat:nth-child(odd){border-right:1px solid var(--line);padding-right:25px}
+.stat:nth-child(even){padding-left:25px}
+.stat b{
+font:10px monospace;
+color:var(--accent);
+}
+.stat span{font-size:13px;color:#777}
+.statement{
+min-height:80vh;
+padding:130px 5%;
+display:flex;
+justify-content:center;
+flex-direction:column;
+}
+.statement small{
+font:10px monospace;
+color:#666;
+letter-spacing:3px;
+}
+.statement h2{
+font-size:clamp(80px,15vw,220px);
+line-height:.78;
+letter-spacing:-12px;
+font-weight:500;
+margin-top:25px;
+}
+.statement h2 span{color:#666}
+.statement-bottom{
+display:flex;
+justify-content:space-between;
+margin-top:80px;
+font:8px monospace;
+color:#555;
+}
+.contact{
+min-height:80vh;
+display:flex;
+justify-content:center;
+flex-direction:column;
+}
+.contact h2{
+font-size:clamp(60px,8vw,120px);
+line-height:.9;
+letter-spacing:-7px;
+font-weight:500;
+}
+.contact h2 span{color:#666}
+.contact-btn{
+margin-top:45px;
+width:max-content;
+padding:17px 25px;
+background:#fff;
+border:0;
+font-size:11px;
+transition:.3s;
+}
+.contact-btn:hover{
+background:var(--accent);
+transform:translateY(-4px);
+}
+footer{
+border-top:1px solid var(--line);
+padding:35px 5%;
+display:flex;
+justify-content:space-between;
+color:#555;
+font:8px monospace;
+}
+@keyframes spin{
+to{transform:rotate(360deg)}
+}
+@keyframes spinr{
+to{transform:rotate(-360deg)}
+}
+@media(max-width:850px){
+.links{
+position:fixed;
+inset:0 0 0 auto;
+width:280px;
+height:100vh;
+background:#0d0d0d;
+border-left:1px solid var(--line);
+display:flex;
+flex-direction:column;
+padding:120px 35px;
+gap:28px;
+transform:translateX(100%);
+transition:.4s;
+}
+.links.open{transform:translateX(0)}
+.links a{font-size:22px}
+.menu{display:block}
+.hero{
+grid-template-columns:1fr;
+padding-top:130px;
+}
+.visual{height:420px}
+.heading{grid-template-columns:1fr;gap:30px}
+.projects{grid-template-columns:1fr}
+.card.big{grid-column:auto}
+.about{grid-template-columns:1fr;gap:50px}
+.section{padding:110px 25px}
+.hero{padding-left:25px;padding-right:25px}
+.statement{padding-left:25px;padding-right:25px}
+.contact{padding-left:25px;padding-right:25px}
+footer{padding:30px 25px;gap:20px;flex-direction:column}
+}
+@media(max-width:500px){
+.hero h1{letter-spacing:-4px}
+.hero p{font-size:13px}
+.actions{flex-direction:column;align-items:flex-start}
+.visual{width:100%;height:360px}
+.core{width:120px;height:120px}
+.core:before{width:70px;height:70px}
+.art,.card:not(.big) .art{height:330px}
+.interface{width:78%}
+.heading h2,.about h2{letter-spacing:-4px}
+.statement h2{font-size:23vw;letter-spacing:-6px}
+.statement-bottom{flex-direction:column;gap:12px}
+}
+</style>
+</head>
 
-    <meta
-      name="description"
-      content="ERNURVYNX — independent digital creative studio building websites, digital experiences and experimental technology."
-    />
+<body>
 
-    <meta
-      name="theme-color"
-      content="#080808"
-    />
+<header class="nav" id="nav">
+  <a href="#home" class="logo">
+    <i>E</i>
+    ERNURVYNX
+  </a>
 
-    <meta
-      name="robots"
-      content="index, follow"
-    />
+  <nav class="links" id="links">
+    <a href="#home">Home</a>
+    <a href="#work">Work</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
 
-    <title>ERNURVYNX — Digital Creative Studio</title>
+  <button class="menu" id="menu">☰</button>
+</header>
 
-    <link
-      rel="icon"
-      href="/favicon.svg"
-      type="image/svg+xml"
-    />
-  </head>
+<main>
 
-  <body>
-    <div id="root"></div>
+<section class="hero" id="home">
 
-    <script
-      type="module"
-      src="/src/main.jsx"
-    ></script>
-  </body>
+  <div>
+    <small>
+      <span class="dot"></span>
+      DIGITAL CREATIVE STUDIO
+    </small>
+
+    <h1>
+      Ideas become
+      <br>
+      <span>digital reality.</span>
+    </h1>
+
+    <p>
+      ERNURVYNX creates websites, digital products
+      and experimental experiences where technology
+      meets creativity.
+    </p>
+
+    <div class="actions">
+      <button class="btn" onclick="go('work')">
+        Explore work ↗
+      </button>
+
+      <button class="btn dark" onclick="go('about')">
+        Discover studio
+      </button>
+    </div>
+  </div>
+
+  <div class="visual">
+    <div class="ring r1"></div>
+    <div class="ring r2"></div>
+    <div class="ring r3"></div>
+
+    <div class="core"></div>
+
+    <div class="tag t1">
+      <b>01</b>DIGITAL
+    </div>
+
+    <div class="tag t2">
+      <b>02</b>CREATIVE
+    </div>
+
+    <div class="tag t3">
+      <b>03</b>FUTURE
+    </div>
+  </div>
+
+  <div class="scroll">SCROLL TO EXPLORE ─────</div>
+
+</section>
+
+
+<section class="section" id="work">
+
+  <div class="heading">
+    <div>
+      <div class="num">01 / SELECTED WORK</div>
+
+      <h2>
+        Selected
+        <br>
+        <em>experiments.</em>
+      </h2>
+    </div>
+
+    <p>
+      Digital concepts, interfaces and visual
+      experiments created around technology,
+      design and curiosity.
+    </p>
+  </div>
+
+  <div class="projects">
+
+    <article class="card big">
+      <div class="art art1">
+        <div class="interface">
+          <div class="interface-line"></div>
+          <h3>PAYFLOW</h3>
+          <strong>08</strong>
+        </div>
+      </div>
+
+      <div class="info">
+        <h3>PayFlow</h3>
+        <p>Fintech / Web Experience</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="art art2">
+        <div class="system"></div>
+      </div>
+
+      <div class="info">
+        <h3>Neural</h3>
+        <p>AI / Interactive System</p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="art art3">
+        <div class="words">
+          <span>CREATE</span>
+          <span>WITHOUT</span>
+          <span>LIMITS</span>
+        </div>
+      </div>
+
+      <div class="info">
+        <h3>VX Studio</h3>
+        <p>Identity / Digital Design</p>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+
+<section class="section about" id="about">
+
+  <div>
+    <div class="num">02 / ABOUT</div>
+
+    <h2>
+      Not another
+      <br>
+      <span>template.</span>
+    </h2>
+  </div>
+
+  <div>
+
+    <p class="lead">
+      ERNURVYNX is an independent digital
+      creative project focused on building
+      useful, expressive and unexpected
+      digital experiences.
+    </p>
+
+    <div class="stats">
+
+      <div class="stat">
+        <b>01</b>
+        <span>Web experiences</span>
+      </div>
+
+      <div class="stat">
+        <b>02</b>
+        <span>AI & technology</span>
+      </div>
+
+      <div class="stat">
+        <b>03</b>
+        <span>Creative systems</span>
+      </div>
+
+      <div class="stat">
+        <b>04</b>
+        <span>Digital experiments</span>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<section class="statement">
+
+  <small>ERNURVYNX / 2026</small>
+
+  <h2>
+    DIGITAL
+    <br>
+    <span>THINGS.</span>
+  </h2>
+
+  <div class="statement-bottom">
+    <span>BUILD / CREATE / EXPLORE</span>
+    <span>KEEP MOVING ↗</span>
+  </div>
+
+</section>
+
+
+<section class="section contact" id="contact">
+
+  <div class="num">03 / CONTACT</div>
+
+  <h2>
+    Have an idea?
+    <br>
+    <span>Let's build it.</span>
+  </h2>
+
+  <button class="contact-btn" onclick="contactMessage()">
+    Start a conversation ↗
+  </button>
+
+</section>
+
+</main>
+
+
+<footer>
+  <span>ERNURVYNX — DIGITAL CREATIVE STUDIO</span>
+  <span>© 2026</span>
+</footer>
+
+
+<script>
+const nav=document.getElementById("nav");
+const links=document.getElementById("links");
+const menu=document.getElementById("menu");
+
+window.addEventListener("scroll",()=>{
+  nav.classList.toggle("active",window.scrollY>40);
+});
+
+menu.addEventListener("click",()=>{
+  links.classList.toggle("open");
+  menu.textContent=links.classList.contains("open")?"×":"☰";
+});
+
+document.querySelectorAll(".links a").forEach(a=>{
+  a.addEventListener("click",()=>{
+    links.classList.remove("open");
+    menu.textContent="☰";
+  });
+});
+
+function go(id){
+  document.getElementById(id)?.scrollIntoView({
+    behavior:"smooth"
+  });
+}
+
+function contactMessage(){
+  alert(
+    "Contact section дайын. Келесі кезеңде мұнда толық contact form қосамыз."
+  );
+}
+
+const cards=document.querySelectorAll(".card");
+
+cards.forEach(card=>{
+  card.addEventListener("mousemove",e=>{
+    const r=card.getBoundingClientRect();
+    const x=(e.clientX-r.left)/r.width-.5;
+    const y=(e.clientY-r.top)/r.height-.5;
+
+    card.style.transform=
+      `perspective(900px) rotateX(${y*-2}deg) rotateY(${x*2}deg)`;
+  });
+
+  card.addEventListener("mouseleave",()=>{
+    card.style.transform="";
+  });
+});
+</script>
+
+</body>
 </html>
